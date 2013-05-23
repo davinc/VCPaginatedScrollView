@@ -16,6 +16,8 @@
 		454F016A174E0AF000C7B490 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 454F0169174E0AF000C7B490 /* Default.png */; };
 		454F016C174E0AF000C7B490 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 454F016B174E0AF000C7B490 /* Default@2x.png */; };
 		454F016E174E0AF000C7B490 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 454F016D174E0AF000C7B490 /* Default-568h@2x.png */; };
+		454F0177174E0B7800C7B490 /* VCPaginatedScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 454F0176174E0B7800C7B490 /* VCPaginatedScrollView.m */; };
+		454F017A174E0C3500C7B490 /* VCPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 454F0179174E0C3500C7B490 /* VCPageView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,10 @@
 		454F0169174E0AF000C7B490 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		454F016B174E0AF000C7B490 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		454F016D174E0AF000C7B490 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		454F0175174E0B7800C7B490 /* VCPaginatedScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCPaginatedScrollView.h; sourceTree = "<group>"; };
+		454F0176174E0B7800C7B490 /* VCPaginatedScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCPaginatedScrollView.m; sourceTree = "<group>"; };
+		454F0178174E0C3500C7B490 /* VCPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCPageView.h; sourceTree = "<group>"; };
+		454F0179174E0C3500C7B490 /* VCPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCPageView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +84,7 @@
 		454F015D174E0AF000C7B490 /* Demo */ = {
 			isa = PBXGroup;
 			children = (
+				454F0174174E0B6700C7B490 /* VCPaginatedScrollView */,
 				454F0166174E0AF000C7B490 /* VCAppDelegate.h */,
 				454F0167174E0AF000C7B490 /* VCAppDelegate.m */,
 				454F015E174E0AF000C7B490 /* Supporting Files */,
@@ -97,6 +104,18 @@
 				454F016D174E0AF000C7B490 /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		454F0174174E0B6700C7B490 /* VCPaginatedScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				454F0175174E0B7800C7B490 /* VCPaginatedScrollView.h */,
+				454F0176174E0B7800C7B490 /* VCPaginatedScrollView.m */,
+				454F0178174E0C3500C7B490 /* VCPageView.h */,
+				454F0179174E0C3500C7B490 /* VCPageView.m */,
+			);
+			name = VCPaginatedScrollView;
+			path = ../../VCPaginatedScrollView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -167,6 +186,8 @@
 			files = (
 				454F0164174E0AF000C7B490 /* main.m in Sources */,
 				454F0168174E0AF000C7B490 /* VCAppDelegate.m in Sources */,
+				454F0177174E0B7800C7B490 /* VCPaginatedScrollView.m in Sources */,
+				454F017A174E0C3500C7B490 /* VCPageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
