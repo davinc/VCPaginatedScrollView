@@ -8,6 +8,8 @@
 
 #import "VCAppDelegate.h"
 
+#import "VCRootViewController.h"
+
 @implementation VCAppDelegate
 
 - (void)dealloc
@@ -18,10 +20,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-    // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
-    [self.window makeKeyAndVisible];
+	self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+
+	VCRootViewController *rootVC = [[[VCRootViewController alloc] init] autorelease];
+	UINavigationController *navigationController = [[[UINavigationController alloc] initWithRootViewController:rootVC] autorelease];
+
+	// Override point for customization after application launch.
+	self.window.rootViewController = navigationController;
+	[self.window makeKeyAndVisible];
     return YES;
 }
 

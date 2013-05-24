@@ -18,6 +18,8 @@
 		454F016E174E0AF000C7B490 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 454F016D174E0AF000C7B490 /* Default-568h@2x.png */; };
 		454F0177174E0B7800C7B490 /* VCPaginatedScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 454F0176174E0B7800C7B490 /* VCPaginatedScrollView.m */; };
 		454F017A174E0C3500C7B490 /* VCPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 454F0179174E0C3500C7B490 /* VCPageView.m */; };
+		45588847174F3BCE006A031E /* VCPaginatedScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45588846174F3BCE006A031E /* VCPaginatedScrollViewController.m */; };
+		4558884A174F3BFC006A031E /* VCRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45588849174F3BFC006A031E /* VCRootViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,10 @@
 		454F0176174E0B7800C7B490 /* VCPaginatedScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCPaginatedScrollView.m; sourceTree = "<group>"; };
 		454F0178174E0C3500C7B490 /* VCPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCPageView.h; sourceTree = "<group>"; };
 		454F0179174E0C3500C7B490 /* VCPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCPageView.m; sourceTree = "<group>"; };
+		45588845174F3BCE006A031E /* VCPaginatedScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCPaginatedScrollViewController.h; sourceTree = "<group>"; };
+		45588846174F3BCE006A031E /* VCPaginatedScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCPaginatedScrollViewController.m; sourceTree = "<group>"; };
+		45588848174F3BFC006A031E /* VCRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCRootViewController.h; sourceTree = "<group>"; };
+		45588849174F3BFC006A031E /* VCRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCRootViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +93,8 @@
 				454F0174174E0B6700C7B490 /* VCPaginatedScrollView */,
 				454F0166174E0AF000C7B490 /* VCAppDelegate.h */,
 				454F0167174E0AF000C7B490 /* VCAppDelegate.m */,
+				45588848174F3BFC006A031E /* VCRootViewController.h */,
+				45588849174F3BFC006A031E /* VCRootViewController.m */,
 				454F015E174E0AF000C7B490 /* Supporting Files */,
 			);
 			path = Demo;
@@ -113,6 +121,8 @@
 				454F0176174E0B7800C7B490 /* VCPaginatedScrollView.m */,
 				454F0178174E0C3500C7B490 /* VCPageView.h */,
 				454F0179174E0C3500C7B490 /* VCPageView.m */,
+				45588845174F3BCE006A031E /* VCPaginatedScrollViewController.h */,
+				45588846174F3BCE006A031E /* VCPaginatedScrollViewController.m */,
 			);
 			name = VCPaginatedScrollView;
 			path = ../../VCPaginatedScrollView;
@@ -188,6 +198,8 @@
 				454F0168174E0AF000C7B490 /* VCAppDelegate.m in Sources */,
 				454F0177174E0B7800C7B490 /* VCPaginatedScrollView.m in Sources */,
 				454F017A174E0C3500C7B490 /* VCPageView.m in Sources */,
+				45588847174F3BCE006A031E /* VCPaginatedScrollViewController.m in Sources */,
+				4558884A174F3BFC006A031E /* VCRootViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,6 +314,7 @@
 				454F0173174E0AF000C7B490 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

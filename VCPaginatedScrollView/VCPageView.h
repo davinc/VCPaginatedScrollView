@@ -27,5 +27,10 @@
 #import <UIKit/UIKit.h>
 
 @interface VCPageView : UIView
+{
+	
+}
+
+@property (nonatomic, assign) NSInteger index;
 
 @end

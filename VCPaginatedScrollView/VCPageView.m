@@ -28,6 +28,8 @@
 
 @implementation VCPageView
 
+@synthesize index;
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];

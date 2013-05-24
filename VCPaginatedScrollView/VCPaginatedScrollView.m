@@ -37,7 +37,9 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-		_scrollView = [[UIScrollView alloc] initWithFrame:CGRectZero];
+		_centerPageIndex = -1;
+		
+		_scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
 		_scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 		_scrollView.pagingEnabled = YES;
 		_scrollView.scrollsToTop = NO;
@@ -57,13 +59,122 @@
 	[super dealloc];
 }
 
+
+#pragma mark - Private Methods
+
+- (VCPageView *)pageAtIndex:(NSInteger)index
+{
+	if (index < 0 || index >= _numberOfPages) {
+		return nil;
+	}
+	VCPageView *page = [_pages objectAtIndex:index];
+	return page;
+}
+
+- (void)updateContentSize
+{
+	_scrollView.contentSize = CGSizeMake(_scrollView.bounds.size.width * _numberOfPages,
+										 _scrollView.bounds.size.height);
+}
+
+- (void)configurePage:(VCPageView *)page forIndex:(NSInteger)index
+{
+	page.index = index;
+	// extra stuff
+}
+
+
+#pragma mark - Layout
+
+- (NSInteger)currentCenterPageIndex
+{
+	CGPoint currentOffset = _scrollView.contentOffset;
+
+	return (NSInteger)(currentOffset.x / _scrollView.bounds.size.width);
+}
+
 - (void)layoutSubviews
 {
 	[super layoutSubviews];
-	_scrollView.frame = self.bounds;
+	[self layoutPages];
 }
 
-#pragma mark - Private Methods
+- (void)layoutPages
+{
+	// get current visible center index
+	NSInteger currentCenterPageIndex = [self currentCenterPageIndex];
+
+	// if same as _centerPageIndex return;
+	if (_centerPageIndex == currentCenterPageIndex) {
+		return;
+	}
+
+	_centerPageIndex = currentCenterPageIndex;
+
+	// layout visible items
+	[self layoutPageAtIndex:_centerPageIndex-1];
+	[self layoutPageAtIndex:_centerPageIndex];
+	[self layoutPageAtIndex:_centerPageIndex+1];
+
+	// prepare for reuse previous pages
+	[self prepareReuseCellAtIndex:_centerPageIndex-2];
+
+	// prepare for reuse upcoming pages
+	[self prepareReuseCellAtIndex:_centerPageIndex+2];
+}
+
+- (void)layoutPageAtIndex:(NSInteger)index
+{
+	BOOL shouldLayout = NO;
+	VCPageView *page = [self pageAtIndex:index];
+	if (page == nil) return;
+	
+	if ((id)page == [NSNull null]) {
+		if ([self.dataSource respondsToSelector:@selector(pagingScrollView:pageViewForIndex:)]) {
+			page = [self.dataSource pagingScrollView:self pageViewForIndex:index];
+			page.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+		}
+		[self configurePage:page forIndex:index];
+		
+		[_pages replaceObjectAtIndex:index withObject:page];
+		[_scrollView addSubview:page];
+		
+		shouldLayout = YES;
+	}else {
+		if (page.index != index) {
+			[self configurePage:page forIndex:index];
+			shouldLayout = YES;
+		}
+	}
+	
+	if (shouldLayout) {
+		page.frame = [self frameForPageAtIndex:index];
+	}
+}
+
+- (CGRect)frameForPageAtIndex:(NSInteger)index
+{
+	CGRect pageFrame = CGRectZero;
+
+	// horizontal scroll
+	pageFrame.origin = CGPointMake(index * _scrollView.bounds.size.width, 0);
+	pageFrame.size = _scrollView.bounds.size;
+
+	return pageFrame;
+}
+
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+	// calculate the center index
+//	CGPoint currentOffset = _scrollView.contentOffset;
+//
+//	_centerPageIndex = (NSInteger)(currentOffset.x / _scrollView.bounds.size.width);
+	[self setNeedsLayout];
+}
+
 
 #pragma mark - Reuse Queue Logic
 
@@ -93,6 +204,9 @@
 - (BOOL)prepareReuseCellAtIndex:(NSUInteger)index
 {
 	VCPageView *cell = [self pageAtIndex:index];
+	if (cell == nil) {
+		return NO;
+	}
     if ((id)cell != [NSNull null]) {
         [cell removeFromSuperview];
         [self queueReusableCell:cell];

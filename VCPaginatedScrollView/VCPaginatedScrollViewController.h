@@ -1,6 +1,6 @@
 //
-//  VCPaginatedScrollView.h
-//  Demo
+//  VCPaginatedScrollViewController.h
+//  YouConnect
 //
 //  Created by Vinay Chavan on 23/05/13.
 //
@@ -26,44 +26,12 @@
 
 #import <UIKit/UIKit.h>
 
-#import "VCPageView.h"
+#import "VCPaginatedScrollView.h"
 
-@class VCPaginatedScrollView;
-
-@protocol VCPaginatedScrollViewDelegate <UIScrollViewDelegate>
-
-
-@end
-
-
-@protocol VCPaginatedScrollViewDataSource <NSObject>
-
-@required
-- (NSInteger)numberOfPagesInPaginatedScrollView:(VCPaginatedScrollView *)paginatedScrollView;
-- (VCPageView *)pagingScrollView:(VCPaginatedScrollView *)paginatedScrollView pageViewForIndex:(NSInteger)pageIndex;
-
-@end
-
-
-@interface VCPaginatedScrollView : UIView <UIScrollViewDelegate>
+@interface VCPaginatedScrollViewController : UIViewController <VCPaginatedScrollViewDataSource, VCPaginatedScrollViewDelegate>
 {
 @private
-	UIScrollView *_scrollView;
-	NSInteger _centerPageIndex;
-
-	NSMutableArray *_pages;
-	NSInteger _numberOfPages;
-
-	NSMutableArray *_reusablePages;
+	VCPaginatedScrollView *_paginatedScrollView;
 }
-
-@property (nonatomic, assign) id<VCPaginatedScrollViewDataSource> dataSource;
-@property (nonatomic, assign) id<VCPaginatedScrollViewDelegate> delegate;
-
-@property (nonatomic, readonly) NSInteger numberOfPages;
-
-- (void)reloadData;
-
-- (VCPageView *)dequeueReusableCell;
 
 @end
