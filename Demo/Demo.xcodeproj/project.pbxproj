@@ -17,7 +17,6 @@
 		454F016C174E0AF000C7B490 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 454F016B174E0AF000C7B490 /* Default@2x.png */; };
 		454F016E174E0AF000C7B490 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 454F016D174E0AF000C7B490 /* Default-568h@2x.png */; };
 		454F0177174E0B7800C7B490 /* VCPaginatedScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 454F0176174E0B7800C7B490 /* VCPaginatedScrollView.m */; };
-		454F017A174E0C3500C7B490 /* VCPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 454F0179174E0C3500C7B490 /* VCPageView.m */; };
 		45588847174F3BCE006A031E /* VCPaginatedScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45588846174F3BCE006A031E /* VCPaginatedScrollViewController.m */; };
 		4558884A174F3BFC006A031E /* VCRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45588849174F3BFC006A031E /* VCRootViewController.m */; };
 /* End PBXBuildFile section */
@@ -38,8 +37,6 @@
 		454F016D174E0AF000C7B490 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		454F0175174E0B7800C7B490 /* VCPaginatedScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCPaginatedScrollView.h; sourceTree = "<group>"; };
 		454F0176174E0B7800C7B490 /* VCPaginatedScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCPaginatedScrollView.m; sourceTree = "<group>"; };
-		454F0178174E0C3500C7B490 /* VCPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCPageView.h; sourceTree = "<group>"; };
-		454F0179174E0C3500C7B490 /* VCPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCPageView.m; sourceTree = "<group>"; };
 		45588845174F3BCE006A031E /* VCPaginatedScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCPaginatedScrollViewController.h; sourceTree = "<group>"; };
 		45588846174F3BCE006A031E /* VCPaginatedScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VCPaginatedScrollViewController.m; sourceTree = "<group>"; };
 		45588848174F3BFC006A031E /* VCRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VCRootViewController.h; sourceTree = "<group>"; };
@@ -119,8 +116,6 @@
 			children = (
 				454F0175174E0B7800C7B490 /* VCPaginatedScrollView.h */,
 				454F0176174E0B7800C7B490 /* VCPaginatedScrollView.m */,
-				454F0178174E0C3500C7B490 /* VCPageView.h */,
-				454F0179174E0C3500C7B490 /* VCPageView.m */,
 				45588845174F3BCE006A031E /* VCPaginatedScrollViewController.h */,
 				45588846174F3BCE006A031E /* VCPaginatedScrollViewController.m */,
 			);
@@ -197,7 +192,6 @@
 				454F0164174E0AF000C7B490 /* main.m in Sources */,
 				454F0168174E0AF000C7B490 /* VCAppDelegate.m in Sources */,
 				454F0177174E0B7800C7B490 /* VCPaginatedScrollView.m in Sources */,
-				454F017A174E0C3500C7B490 /* VCPageView.m in Sources */,
 				45588847174F3BCE006A031E /* VCPaginatedScrollViewController.m in Sources */,
 				4558884A174F3BFC006A031E /* VCRootViewController.m in Sources */,
 			);

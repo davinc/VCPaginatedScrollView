@@ -26,9 +26,18 @@
 
 #import <UIKit/UIKit.h>
 
-#import "VCPageView.h"
+@protocol VCPageView <NSObject>
+
+@required
+@property (nonatomic, assign) NSInteger index;
+
+@end
+
+@interface VCPageView : UIView <VCPageView> @end
 
 @class VCPaginatedScrollView;
+
+
 
 @protocol VCPaginatedScrollViewDelegate <UIScrollViewDelegate>
 
@@ -36,11 +45,12 @@
 @end
 
 
+
 @protocol VCPaginatedScrollViewDataSource <NSObject>
 
 @required
 - (NSInteger)numberOfPagesInPaginatedScrollView:(VCPaginatedScrollView *)paginatedScrollView;
-- (VCPageView *)pagingScrollView:(VCPaginatedScrollView *)paginatedScrollView pageViewForIndex:(NSInteger)pageIndex;
+- (id<VCPageView>)pagingScrollView:(VCPaginatedScrollView *)paginatedScrollView pageViewForIndex:(NSInteger)pageIndex;
 
 @end
 
@@ -53,6 +63,7 @@
 
 	NSMutableArray *_pages;
 	NSInteger _numberOfPages;
+	CGFloat _pageMargin;
 
 	NSMutableArray *_reusablePages;
 }
@@ -61,9 +72,12 @@
 @property (nonatomic, assign) id<VCPaginatedScrollViewDelegate> delegate;
 
 @property (nonatomic, readonly) NSInteger numberOfPages;
+@property (nonatomic, assign) NSInteger centerPageIndex;
 
 - (void)reloadData;
 
-- (VCPageView *)dequeueReusableCell;
+- (id<VCPageView>)dequeueReusablePage;
+
+
 
 @end

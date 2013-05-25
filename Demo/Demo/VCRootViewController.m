@@ -44,9 +44,9 @@
 	return 10;
 }
 
-- (VCPageView *)pagingScrollView:(VCPaginatedScrollView *)paginatedScrollView pageViewForIndex:(NSInteger)pageIndex
+- (id<VCPageView>)pagingScrollView:(VCPaginatedScrollView *)paginatedScrollView pageViewForIndex:(NSInteger)pageIndex
 {
-	VCPageView *page = [paginatedScrollView dequeueReusableCell];
+	VCPageView *page = (VCPageView *)[paginatedScrollView dequeueReusablePage];
 	if (page == nil) {
 		page = [[[VCPageView alloc] init] autorelease];
 		page.layer.borderColor = [UIColor greenColor].CGColor;

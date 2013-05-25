@@ -26,11 +26,19 @@
 
 #import "VCPaginatedScrollView.h"
 
+@implementation VCPageView
+
+@synthesize index;
+
+@end
+
+
 @implementation VCPaginatedScrollView
 
 @synthesize dataSource = _dataSource;
 @synthesize delegate = _delegate;
 @synthesize numberOfPages = _numberOfPages;
+@synthesize centerPageIndex = _centerPageIndex;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -38,9 +46,12 @@
     if (self) {
         // Initialization code
 		_centerPageIndex = -1;
+
+		_pageMargin = 20.0;
 		
 		_scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
 		_scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+		_scrollView.bounces = YES;
 		_scrollView.pagingEnabled = YES;
 		_scrollView.scrollsToTop = NO;
 		_scrollView.delegate = self;
@@ -117,10 +128,12 @@
 	[self layoutPageAtIndex:_centerPageIndex+1];
 
 	// prepare for reuse previous pages
-	[self prepareReuseCellAtIndex:_centerPageIndex-2];
+	[self prepareReusePageAtIndex:_centerPageIndex-2];
 
 	// prepare for reuse upcoming pages
-	[self prepareReuseCellAtIndex:_centerPageIndex+2];
+	[self prepareReusePageAtIndex:_centerPageIndex+2];
+	
+	[self updateContentSize];
 }
 
 - (void)layoutPageAtIndex:(NSInteger)index
@@ -131,7 +144,7 @@
 	
 	if ((id)page == [NSNull null]) {
 		if ([self.dataSource respondsToSelector:@selector(pagingScrollView:pageViewForIndex:)]) {
-			page = [self.dataSource pagingScrollView:self pageViewForIndex:index];
+			page = (VCPageView *)[self.dataSource pagingScrollView:self pageViewForIndex:index];
 			page.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 		}
 		[self configurePage:page forIndex:index];
@@ -154,31 +167,34 @@
 
 - (CGRect)frameForPageAtIndex:(NSInteger)index
 {
-	CGRect pageFrame = CGRectZero;
+	CGRect pageFrame = _scrollView.bounds;
 
 	// horizontal scroll
-	pageFrame.origin = CGPointMake(index * _scrollView.bounds.size.width, 0);
-	pageFrame.size = _scrollView.bounds.size;
+	pageFrame.origin.x = index * _scrollView.bounds.size.width + _pageMargin;
+	pageFrame.size.width -= _pageMargin * 2;
 
 	return pageFrame;
 }
 
+- (CGRect)frameForPaginatedScrollView
+{
+	CGRect frame = self.bounds;
+    frame.origin.x -= _pageMargin;
+    frame.size.width += (2 * _pageMargin);
+	return frame;
+}
 
 #pragma mark - UIScrollViewDelegate
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-	// calculate the center index
-//	CGPoint currentOffset = _scrollView.contentOffset;
-//
-//	_centerPageIndex = (NSInteger)(currentOffset.x / _scrollView.bounds.size.width);
 	[self setNeedsLayout];
 }
 
 
 #pragma mark - Reuse Queue Logic
 
-- (void)queueReusableCell:(VCPageView *)aPage
+- (void)queueReusablePage:(VCPageView *)aPage
 {
 	NSUInteger reusableQueueLimit = 2;
 
@@ -189,7 +205,7 @@
 	[_reusablePages addObject:aPage];
 }
 
-- (VCPageView *)dequeueReusableCell
+- (VCPageView *)dequeueReusablePage
 {
 	if ([_reusablePages count] == 0) return nil;
 
@@ -201,7 +217,7 @@
 	return [page autorelease];
 }
 
-- (BOOL)prepareReuseCellAtIndex:(NSUInteger)index
+- (BOOL)prepareReusePageAtIndex:(NSUInteger)index
 {
 	VCPageView *cell = [self pageAtIndex:index];
 	if (cell == nil) {
@@ -209,7 +225,7 @@
 	}
     if ((id)cell != [NSNull null]) {
         [cell removeFromSuperview];
-        [self queueReusableCell:cell];
+        [self queueReusablePage:cell];
         [_pages replaceObjectAtIndex:index withObject:[NSNull null]];
 		return YES;
     }
@@ -242,6 +258,7 @@
 	}
 
 	// update content size
+	_scrollView.frame = [self frameForPaginatedScrollView];
 	[self updateContentSize];
 
 	// set cell pool size for reusability, should be double of _numberOfCellsInRow
