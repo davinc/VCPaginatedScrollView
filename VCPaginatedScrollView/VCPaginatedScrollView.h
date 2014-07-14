@@ -26,25 +26,23 @@
 
 #import <UIKit/UIKit.h>
 
+// VCPageView Protocol
 @protocol VCPageView <NSObject>
-
 @required
 @property (nonatomic, assign) NSInteger index;
-
 @end
 
-@interface VCPageView : UIView <VCPageView> @end
+// VCPageView Base Class
+@interface VCPageView : UIView <VCPageView>
+@end
+
+
+
 
 @class VCPaginatedScrollView;
 
 
-
-@protocol VCPaginatedScrollViewDelegate <UIScrollViewDelegate>
-
-
-@end
-
-
+@protocol VCPaginatedScrollViewDelegate <UIScrollViewDelegate> @end
 
 @protocol VCPaginatedScrollViewDataSource <NSObject>
 
@@ -78,6 +76,6 @@
 
 - (id<VCPageView>)dequeueReusablePage;
 
-
+- (void)scrollToPageAtIndex:(NSInteger)index animated:(BOOL)animated;
 
 @end

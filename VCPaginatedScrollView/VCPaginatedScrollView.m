@@ -57,9 +57,29 @@
 		_scrollView.delegate = self;
 		_scrollView.showsVerticalScrollIndicator = NO;
 		_scrollView.showsHorizontalScrollIndicator = NO;
+		_scrollView.directionalLockEnabled = YES;
 		[self addSubview:_scrollView];
     }
     return self;
+}
+
+- (void)awakeFromNib
+{
+	[super awakeFromNib];
+	
+	_centerPageIndex = -1;
+	
+	_pageMargin = 20.0;
+	
+	_scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
+	_scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+	_scrollView.bounces = YES;
+	_scrollView.pagingEnabled = YES;
+	_scrollView.scrollsToTop = NO;
+	_scrollView.delegate = self;
+	_scrollView.showsVerticalScrollIndicator = NO;
+	_scrollView.showsHorizontalScrollIndicator = NO;
+	[self addSubview:_scrollView];
 }
 
 - (void)dealloc
@@ -267,6 +287,13 @@
 
 	// call for layout
 	[self setNeedsLayout];
+}
+
+- (void)scrollToPageAtIndex:(NSInteger)index animated:(BOOL)animated
+{
+	CGRect rectToScroll = [self frameForPageAtIndex:index];
+	[_scrollView scrollRectToVisible:rectToScroll
+							animated:animated];
 }
 
 @end
